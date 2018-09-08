@@ -1,2 +1,1 @@
-# graphql-client
-Java GraphQL client implementation
+# Java GraphQL client implementation
