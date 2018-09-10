@@ -5,13 +5,13 @@ import java.util.List;
 
 public class Type {
 
-    public String name;
+    private String name;
 
-    public String kind;
+    private String kind;
 
-    public String description;
+    private String description;
 
-    public List<Field> fields = new ArrayList<>();
+    private List<Field> fields = new ArrayList<>();
 
     public String getName() {
         return name;

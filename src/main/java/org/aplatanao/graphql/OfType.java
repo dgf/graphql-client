@@ -2,11 +2,11 @@ package org.aplatanao.graphql;
 
 public class OfType {
 
-    public String kind;
+    private String kind;
 
-    public String name;
+    private String name;
 
-    public OfType ofType;
+    private OfType ofType;
 
     public String getKind() {
         return kind;

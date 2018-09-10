@@ -2,7 +2,7 @@ package org.aplatanao.graphql;
 
 public class TypeRef {
 
-    public String name;
+    private String name;
 
     public String getName() {
         return name;

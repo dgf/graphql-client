@@ -2,9 +2,9 @@ package org.aplatanao.graphql;
 
 public class FieldType {
 
-    public String name;
+    private String name;
 
-    public OfType ofType;
+    private OfType ofType;
 
     public String getName() {
         return name;

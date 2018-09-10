@@ -4,11 +4,11 @@ public class API {
 
     public String name;
 
-    public String uri;
+    private String uri;
 
-    public String description;
+    private String description;
 
-    public Client client;
+    private Client client;
 
     public API(String name, String uri, String description) {
         this.name = name;

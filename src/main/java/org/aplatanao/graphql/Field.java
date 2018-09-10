@@ -5,13 +5,13 @@ import java.util.List;
 
 public class Field {
 
-    public String name;
+    private String name;
 
-    public String description;
+    private String description;
 
-    public FieldType type;
+    private FieldType type;
 
-    public List<Argument> args = new ArrayList<>();
+    private List<Argument> args = new ArrayList<>();
 
     public String getName() {
         return name;

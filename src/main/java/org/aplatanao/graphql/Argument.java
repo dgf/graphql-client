@@ -2,13 +2,13 @@ package org.aplatanao.graphql;
 
 public class Argument {
 
-    public String name;
+    private String name;
 
-    public String description;
+    private String description;
 
-    public Object defaultValue;
+    private Object defaultValue;
 
-    public TypeRef type;
+    private TypeRef type;
 
     public String getName() {
         return name;
