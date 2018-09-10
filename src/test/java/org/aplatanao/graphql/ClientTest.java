@@ -65,11 +65,15 @@ public class ClientTest {
     @Test
     public void etmb() throws URISyntaxException, IOException {
         schema = readSchema("/etmdb.schema.json");
-        Client client = new Client(new API("test_etmb", uri.toString(), "mocked"));
+        Client client = Client.create(new API("test_etmb", uri.toString(), "mocked"));
         client.init();
+
         assertTrue(client.isInitialized());
         assertThat(client.getStatus(), notNullValue());
+        assertThat(client.getApi(), hasProperty("name", is("test_etmb")));
+        assertThat(client.getTypes().size(), greaterThan(1));
         assertThat(client.getType("String"), notNullValue());
+        assertThat(client.getQueries().size(), greaterThan(1));
         assertThat(client.getQuery("job"), notNullValue());
 
         Type node = client.getType("Node");
@@ -101,7 +105,7 @@ public class ClientTest {
     @Test
     public void gdom() throws URISyntaxException, IOException {
         schema = readSchema("/gdom.schema.json");
-        Client client = new Client(new API("test_gdom", uri.toString(), "mocked"));
+        Client client = Client.create(new API("test_gdom", uri.toString(), "mocked"));
         client.init();
         assertTrue(client.isInitialized());
         assertThat(client.getStatus(), notNullValue());

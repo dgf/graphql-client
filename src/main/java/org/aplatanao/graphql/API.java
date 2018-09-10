@@ -8,8 +8,6 @@ public class API {
 
     private String description;
 
-    private Client client;
-
     public API(String name, String uri, String description) {
         this.name = name;
         this.uri = uri;
@@ -40,15 +38,6 @@ public class API {
 
     public API setDescription(String description) {
         this.description = description;
-        return this;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public API setClient(Client client) {
-        this.client = client;
         return this;
     }
 
