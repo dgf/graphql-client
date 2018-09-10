@@ -8,11 +8,15 @@ import org.apache.http.HttpHeaders;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.ssl.SSLContexts;
 
+import javax.net.ssl.SSLContext;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -25,11 +29,11 @@ public class Client {
 
     private ObjectMapper mapper = new ObjectMapper();
 
-    private CloseableHttpClient client = HttpClients.createDefault();
+    private CloseableHttpClient client;
 
     private URI endpoint;
 
-    public API api;
+    private API api;
 
     private Type queryType;
 
@@ -39,9 +43,23 @@ public class Client {
 
     private String status;
 
-    public Client(API api) throws URISyntaxException {
+    public Client(API api) {
         this.api = api;
-        this.endpoint = new URI(api.uri);
+
+        try {
+            this.endpoint = new URI(api.getUri());
+        } catch (URISyntaxException e) {
+            throw new ClientException("invalid endpoint", e);
+        }
+
+        try {
+            String[] protocols = {"SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"};
+            SSLContext context = SSLContexts.custom().loadTrustMaterial((c, a) -> true).build();
+            SSLConnectionSocketFactory factory = new SSLConnectionSocketFactory(context, protocols, null, NoopHostnameVerifier.INSTANCE);
+            this.client = HttpClients.custom().setSSLSocketFactory(factory).build();
+        } catch (Exception e) {
+            throw new ClientException("HTTP client setup failed", e);
+        }
     }
 
     public void init() {
@@ -63,7 +81,7 @@ public class Client {
         } catch (Exception e) {
             initialized = false;
             status = e.getClass().getSimpleName() + ": " + e.getMessage();
-            throw new RuntimeException(e);
+            throw new ClientException("init failed", e);
         }
     }
 

@@ -6,7 +6,7 @@
 
     <groupId>org.aplatanao.graphql</groupId>
     <artifactId>client</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 
     <properties>
         <java.version>1.8</java.version>
@@ -24,7 +24,7 @@
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>fluent-hc</artifactId>
-            <version>4.5.5</version>
+            <version>4.5.6</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
